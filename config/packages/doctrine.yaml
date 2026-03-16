@@ -1,14 +1,16 @@
 parameters:
     env(DATABASE_URL): ''
     database_driver: pdo_sqlsrv
-    database_host: 192.168.12.223
-    #database_host: localhost
     database_port: 1433
     database_name: AGROLINK
-    database_user: sa
-    #database_password: 2bsystem99
-    database_password: 3SQLR1begr0upe!#23
-    #database_password: 3Ribegroupe23!
+
+    #database_host: 192.168.12.223
+    #database_user: sa
+    #database_password: 3SQLR1begr0upe!#23
+
+    database_host: 127.0.0.1
+    database_user: agrolink
+    database_password: 60Agrolink!#2026
  
 doctrine:
     dbal:
