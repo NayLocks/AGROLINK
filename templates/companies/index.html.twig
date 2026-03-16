@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block body %}
+
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8">
+    <div>
+        <h2 class="text-2xl font-bold text-slate-900">Paramétrage des sociétés</h2>
+        <p class="text-sm text-slate-500">Gérez vos entités juridiques.</p>
+    </div>
+    <button class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-xl shadow-blue-100 flex items-center gap-2">
+        <span class="material-symbols-outlined">domain_add</span> Ajouter une société
+    </button>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-6">
+        {# Boucle d'exemple pour afficher les sociétés #}
+        {% for company in companies %}
+            <div class="card p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-lg font-bold text-slate-900">{{ company.companyName }}</h3>
+                        <span class="status-badge {{ company.isActived ? 'status-shipped' : 'status-draft' }}">{{ company.isActived ? 'Active' : 'Inactive' }}</span>
+                    </div>
+                    <p class="text-sm text-slate-500">{{ company.legal }}</p>
+                    <div class="mt-4 text-xs text-slate-500 space-y-1">
+                        <p>SIRET : {{ company.siret }}</p>
+                        <p>SIREN : {{ company.siren }}</p>
+                        <p>TVA : {{ company.vat }}</p>
+                        <p>{{ company.address1 }}</p>
+                        <p>{{ company.address2 }}</p>
+                        <p>{{ company.poBox }}</p>
+                        <p>{{ company.postalCode }} {{ company.city }}</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Modifier</button>
+                    <button class="px-4 py-2 rounded-xl text-sm font-bold {{ company.isActived ? 'bg-blue-600 text-white' : 'bg-white border border-slate-200 text-slate-600' }}">{{ company.isActived ? 'Société active' : 'Activer' }}</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="card p-6">
+        <h4 class="text-sm font-bold text-slate-900 mb-4">Créer une nouvelle société</h4>
+        <div class="space-y-3">
+            <input type="text" placeholder="Nom commercial" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="Raison sociale" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="SIRET" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="TVA intracom" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="Adresse" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="grid grid-cols-1 gap-3">
+                <input type="email" placeholder="Email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" placeholder="Téléphone" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+        </div>
+        <button class="mt-6 w-full bg-blue-600 text-white px-4 py-3 rounded-xl font-bold text-sm">Enregistrer</button>
+    </div>
+</div>
+{% endblock %}

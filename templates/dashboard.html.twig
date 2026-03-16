@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block body %}
+
+
+<div class="card p-10 mb-8 overflow-hidden">
+                    <div class="grid grid-cols-4 gap-4 w-full lg:w-auto">
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Commandes aujourd'hui</p>
+                            <p class="text-2xl font-black text-slate-900">6</p>
+                            <p class="text-xs text-slate-500">+18% vs hier</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Encours</p>
+                            <p class="text-2xl font-black text-slate-900">12 480 €</p>
+                            <p class="text-xs text-slate-500">3 clients à relancer</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Préparations</p>
+                            <p class="text-2xl font-black text-slate-900">9</p>
+                            <p class="text-xs text-slate-500">Expéditions J+1</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Stock critique</p>
+                            <p class="text-2xl font-black text-slate-900">4 refs</p>
+                            <p class="text-xs text-slate-500">Approvisionnement rapide</p>
+                        </div>
+                    </div>
+             </div>
+{% endblock %}
