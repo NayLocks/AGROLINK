@@ -145,48 +145,65 @@
     </div>
     <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto custom-scrollbar">
         <p class="px-4 text-[10px] font-bold text-slate-400 uppercase mb-2 tracking-widest">Général</p>
-        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-dashboard" onclick="switchModule(&#39;dashboard&#39;)">
+        <a href="#" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-dashboard" onclick="switchModule('dashboard'); return false;">
             <span class="material-symbols-outlined">grid_view</span>
             <span class="font-semibold text-sm">Tableau de Bord</span>
-        </button>
+        </a>
         <p class="px-4 text-[10px] font-bold text-slate-400 uppercase mt-6 mb-2 tracking-widest">Cycle de Vente</p>
-        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-orders" onclick="switchModule(&#39;orders&#39;)">
+        <a href="#" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-orders" onclick="switchModule('orders'); return false;">
             <span class="material-symbols-outlined">receipt_long</span>
             <span class="font-semibold text-sm">Commandes &amp; Factures</span>
-        </button>
-        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-clients" onclick="switchModule(&#39;clients&#39;)">
+        </a>
+        <a href="#" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-clients" onclick="switchModule('clients'); return false;">
             <span class="material-symbols-outlined">group</span>
             <span class="font-semibold text-sm">Fichier Clients</span>
-        </button>
+        </a>
         <p class="px-4 text-[10px] font-bold text-slate-400 uppercase mt-6 mb-2 tracking-widest">Stock &amp; Achats</p>
-        <button class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-catalog" onclick="switchModule(&#39;catalog&#39;)">
+        <a href="#" class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-catalog" onclick="switchModule('catalog'); return false;">
             <span class="material-symbols-outlined">inventory_2</span>
             <span class="font-semibold text-sm">Catalogue Produits</span>
-        </button>
-
+        </a>
         <p class="px-4 text-[10px] font-bold text-slate-400 uppercase mt-6 mb-2 tracking-widest">Paramétrage</p>
-        <a class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-users" href="{{ path('users_index') }}">
-            <span class="material-symbols-outlined">manage_accounts</span>
-            <span class="font-semibold text-sm">Utilisateurs</span>
-        </a>
-        <a class="sidebar-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all" id="nav-settings" href="{{ path('companies_index') }}">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="font-semibold text-sm">Sociétés</span>
-        </a>
+        
+        <div class="space-y-1">
+            <a href="#" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-all group" onclick="toggleSubmenu('submenu-admin'); return false;">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="font-semibold text-sm">Administration</span>
+                </div>
+                <span class="material-symbols-outlined text-sm transition-transform duration-200" id="arrow-admin">expand_more</span>
+            </a>
+            <div id="submenu-admin" class="hidden pl-8 space-y-1">
+                <a href="{{ path('companies_index') }}" class="block w-full text-left px-4 py-2 text-sm font-medium text-slate-500 hover:text-blue-600 rounded-lg">Sociétés</a>
+                <a href="{{ path('users_index') }}" class="block w-full text-left px-4 py-2 text-sm font-medium text-slate-500 hover:text-blue-600 rounded-lg">Utilisateurs</a>
+                
+                <!-- Sous-sous-menu -->
+                <div>
+                    <a href="#" class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-slate-500 hover:text-blue-600 rounded-lg" onclick="toggleSubmenu('sub-sub-security'); return false;">
+                        Sécurité
+                        <span class="material-symbols-outlined text-[16px]" id="arrow-security">expand_more</span>
+                    </a>
+                    <div id="sub-sub-security" class="hidden pl-4 space-y-1 border-l border-slate-100 ml-2">
+                        <a href="#" class="block w-full text-left px-4 py-1.5 text-xs font-medium text-slate-400 hover:text-blue-600 rounded-md">Logs accès</a>
+                        <a href="#" class="block w-full text-left px-4 py-1.5 text-xs font-medium text-slate-400 hover:text-blue-600 rounded-md">Rôles & Droits</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
     <div class="p-6 border-t border-slate-100">
         <div class="relative">
             <div id="user-menu" class="absolute bottom-full left-0 mb-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 hidden opacity-0 translate-y-2 transition-all duration-200 z-50">
-                <button class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 transition-all" onclick="switchModule('profile'); toggleUserMenu();">
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 transition-all" onclick="switchModule('profile'); toggleUserMenu(); return false;">
                     <span class="material-symbols-outlined text-lg">person</span>
                     <span class="font-semibold">Mon Profil</span>
-                </button>
-                <button class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 transition-all">
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 transition-all" onclick="return false;">
                     <span class="material-symbols-outlined text-lg">security</span>
                     <span class="font-semibold">Sécurité</span>
-                </button>
+                </a>
                 <div class="h-[1px] bg-slate-100 my-1"></div>
-                <a href="{{ path('app_logout') }}" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-all">
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-all" onclick="alert('Déconnexion...'); return false;">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     <span class="font-semibold">Se déconnecter</span>
                 </a>
@@ -195,7 +212,7 @@
                 <div class="flex items-center gap-3">
                     <div class="h-10 w-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 font-bold shadow-sm">SM</div>
                     <div class="overflow-hidden">
-                        <p class="text-xs font-bold text-slate-900">{{ app.user.firstName }} {{ app.user.lastName }}</p>
+                        <p class="text-xs font-bold text-slate-900">Sarah Martin</p>
                         <p class="text-[10px] text-slate-500 font-medium">Resp. Logistique</p>
                     </div>
                 </div>
@@ -227,11 +244,11 @@
                 <div class="h-8 w-[1px] bg-slate-200"></div>
                 <div class="text-left">
                     <select id="company-switch" class="text-xs font-bold text-slate-900 bg-transparent outline-none">
-                        {% for c in app.user.company %}
-                            {% if c.companyName != 'DEFAUT' %}
+                        {% for c in app.user.companies %}
+                            {% if c.name != 'DEFAUT' %}
                                 <option value="{{ c.id }}"
                                     {% if c.id == app.user.companyActive.id %}selected{% endif %}>
-                                    {{ c.companyName }}
+                                    {{ c.name }}
                                 </option>
                             {% endif %}
                         {% endfor %}
@@ -289,6 +306,15 @@
         render();
     });
 
+    function toggleSubmenu(id) {
+        const el = document.getElementById(id);
+        const arrow = document.getElementById('arrow-' + id.split('-').pop());
+        el.classList.toggle('hidden');
+        if (arrow) {
+            arrow.style.transform = el.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+    }
+
     function toggleUserMenu() {
         const menu = document.getElementById('user-menu');
         if (menu.classList.contains('hidden')) {
@@ -314,6 +340,25 @@
             setTimeout(() => menu.classList.add('hidden'), 200);
         }
     });
+
+    function switchTab(tabName) {
+            // Masquer tous les onglets
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => tab.classList.add('hidden'));
+            
+            // Afficher l'onglet demandé
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            
+            // Mettre à jour les styles des boutons
+            const allBtns = document.querySelectorAll('.tab-btn');
+            allBtns.forEach(btn => {
+                btn.classList.remove('bg-white', 'text-blue-600', 'shadow-sm');
+                btn.classList.add('text-slate-500', 'hover:text-slate-700');
+            });
+            
+            document.querySelector(`.tab-${tabName}`).classList.remove('text-slate-500', 'hover:text-slate-700');
+            document.querySelector(`.tab-${tabName}`).classList.add('bg-white', 'text-blue-600', 'shadow-sm');
+        }
 </script>
 </body>
 </html>

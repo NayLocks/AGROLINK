@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20260316143950 extends AbstractMigration
+final class Version20260318124028 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,11 +20,7 @@ final class Version20260316143950 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE qagt_companies ADD siret NVARCHAR(14)');
-        $this->addSql('ALTER TABLE qagt_companies ADD siren NVARCHAR(9)');
-        $this->addSql('ALTER TABLE qagt_companies ADD vat NVARCHAR(13)');
-        $this->addSql('ALTER TABLE qagt_users ADD job_function NVARCHAR(100)');
-        $this->addSql('ALTER TABLE qagt_users ADD service NVARCHAR(50)');
+        $this->addSql('ALTER TABLE qagt_users DROP COLUMN auth_code');
     }
 
     public function down(Schema $schema): void
@@ -39,10 +35,6 @@ final class Version20260316143950 extends AbstractMigration
         $this->addSql('CREATE SCHEMA db_denydatawriter');
         $this->addSql('CREATE SCHEMA db_owner');
         $this->addSql('CREATE SCHEMA db_securityadmin');
-        $this->addSql('ALTER TABLE qagt_companies DROP COLUMN siret');
-        $this->addSql('ALTER TABLE qagt_companies DROP COLUMN siren');
-        $this->addSql('ALTER TABLE qagt_companies DROP COLUMN vat');
-        $this->addSql('ALTER TABLE qagt_users DROP COLUMN job_function');
-        $this->addSql('ALTER TABLE qagt_users DROP COLUMN service');
+        $this->addSql('ALTER TABLE qagt_users ADD auth_code NVARCHAR(50)');
     }
 }

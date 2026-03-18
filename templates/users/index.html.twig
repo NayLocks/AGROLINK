@@ -54,7 +54,7 @@
                             </td>
                             <td class="px-8 py-5">
                                 <p class="text-sm font-semibold text-slate-700">{{ user.jobFunction }}</p>
-                                <p class="text-xs text-slate-500">{% if user.companyActive.companyName != 'DEFAUT' %}{{ user.companyActive.companyName }}{% endif %}</p>
+                                <p class="text-xs text-slate-500">{% if user.companyActive.name != 'DEFAUT' %}{{ user.companyActive.name }}{% endif %}</p>
                             </td>
                             <td class="px-8 py-5">
                                 <p class="text-xs font-medium text-slate-600">{{ user.email }}</p>

@@ -19,10 +19,10 @@ class QagtCompaniesRepository extends ServiceEntityRepository
     public function findAll(): array
     {
         return $this->createQueryBuilder('c')    
-            ->where('c.companyName != :default')
+            ->where('c.name != :default')
             ->setParameter('default', 'DEFAUT')
             ->orderBy('c.isActived', 'DESC')
-            ->addOrderBy('c.companyName', 'ASC')
+            ->addOrderBy('c.name', 'ASC')
             ->getQuery()
             ->getResult();
     }

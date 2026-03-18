@@ -46,7 +46,7 @@ class QagtUsers implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, QagtCompanies>
      */
     #[ORM\ManyToMany(targetEntity: QagtCompanies::class, inversedBy: 'qagtUsers')]
-    private Collection $company;
+    private Collection $companies;
 
     #[ORM\ManyToOne(inversedBy: 'qagtUsersActive')]
     private ?QagtCompanies $companyActive = null;
@@ -166,15 +166,15 @@ class QagtUsers implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, QagtCompanies>
      */
-    public function getCompany(): Collection
+    public function getCompanies(): Collection
     {
-        return $this->company;
+        return $this->companies;
     }
 
     public function addCompany(QagtCompanies $company): static
     {
-        if (!$this->company->contains($company)) {
-            $this->company->add($company);
+        if (!$this->companies->contains($company)) {
+            $this->companies->add($company);
         }
 
         return $this;
@@ -182,7 +182,7 @@ class QagtUsers implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeCompany(QagtCompanies $company): static
     {
-        $this->company->removeElement($company);
+        $this->companies->removeElement($company);
 
         return $this;
     }

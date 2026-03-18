@@ -16,7 +16,7 @@ class QagtCompanies
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $companyName = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $legal = null;
@@ -42,7 +42,7 @@ class QagtCompanies
     /**
      * @var Collection<int, QagtUsers>
      */
-    #[ORM\ManyToMany(targetEntity: QagtUsers::class, mappedBy: 'company')]
+    #[ORM\ManyToMany(targetEntity: QagtUsers::class, mappedBy: 'companies')]
     private Collection $qagtUsers;
 
     /**
@@ -60,6 +60,9 @@ class QagtCompanies
     #[ORM\Column(length: 13, nullable: true)]
     private ?string $vat = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $businessName = null;
+
     public function __construct()
     {
         $this->qagtUsers = new ArrayCollection();
@@ -71,14 +74,14 @@ class QagtCompanies
         return $this->id;
     }
 
-    public function getCompanyName(): ?string
+    public function getName(): ?string
     {
-        return $this->companyName;
+        return $this->name;
     }
 
-    public function setCompanyName(string $companyName): static
+    public function setName(string $name): static
     {
-        $this->companyName = $companyName;
+        $this->name = $name;
 
         return $this;
     }
@@ -256,6 +259,18 @@ class QagtCompanies
     public function setVat(?string $vat): static
     {
         $this->vat = $vat;
+
+        return $this;
+    }
+
+    public function getBusinessName(): ?string
+    {
+        return $this->businessName;
+    }
+
+    public function setBusinessName(?string $businessName): static
+    {
+        $this->businessName = $businessName;
 
         return $this;
     }

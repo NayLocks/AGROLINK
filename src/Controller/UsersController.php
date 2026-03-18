@@ -6,10 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+
 use App\Entity\QagtUsers;
+use App\Entity\QagtCompanies;
 use App\Repository\QagtUsersRepository;
 use App\Repository\QagtCompaniesRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class UsersController extends AbstractController
 {
@@ -22,7 +24,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateurs/{id}/modification', name: 'users_edit', methods: ['GET','POST'])]
+    #[Route('/utilisateurs/{id}/modifier', name: 'users_edit', methods: ['GET','POST'])]
     public function edit(QagtUsers $user, Request $request, EntityManagerInterface $entityManager, QagtCompaniesRepository $companiesRepository): Response 
     {
         if ($request->isMethod('POST')) {
@@ -40,7 +42,7 @@ class UsersController extends AbstractController
     
                     if ($field === 'companyActive') {
                         if (empty($value)) {
-                            $company = $companiesRepository->findOneBy(['companyName' => 'DEFAUT']);
+                            $company = $companiesRepository->findOneBy(['name' => 'DEFAUT']);
                             $user->setCompanyActive($company);
                         } else {
                             $company = $companiesRepository->find($value);
@@ -59,12 +61,26 @@ class UsersController extends AbstractController
                         }
                     }
                 }
-    
                 $entityManager->flush();
-    
-                $this->addFlash('success', 'Utilisateur modifié');
-    
-                return $this->redirectToRoute('users_index');
+                
+                $selectedCompanies = $request->request->all('companies') ?? [];
+                
+                // Supprimer toutes les liaisons existantes
+                foreach ($user->getCompanies() as $companies) {
+                    $user->removeCompany($companies);
+                }
+                
+
+                // Ajouter les nouvelles liaisons
+                $companiesRepository = $entityManager->getRepository(QagtCompanies::class);
+                foreach ($selectedCompanies as $companyId) {
+                    $company = $companiesRepository->find($companyId);
+                    if ($company) {
+                        $user->addCompany($company);
+                    }
+                }
+                
+                $entityManager->flush();
             }
     
             return $this->render('users/edit.html.twig', [

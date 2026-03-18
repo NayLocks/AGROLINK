@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20260316100543 extends AbstractMigration
+final class Version20260318123620 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20260316100543 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-
+        $this->addSql('ALTER TABLE qagt_companies ADD business_name NVARCHAR(100)');
     }
 
     public function down(Schema $schema): void
@@ -35,5 +35,6 @@ final class Version20260316100543 extends AbstractMigration
         $this->addSql('CREATE SCHEMA db_denydatawriter');
         $this->addSql('CREATE SCHEMA db_owner');
         $this->addSql('CREATE SCHEMA db_securityadmin');
+        $this->addSql('ALTER TABLE qagt_companies DROP COLUMN business_name');
     }
 }
